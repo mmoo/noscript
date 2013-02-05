@@ -9,18 +9,16 @@ no.page.init = function() {
     var loc = window.location;
     var path = loc.pathname + loc.search;
 
-    if (!historySupport) {
-        // старые браузеры редиректим с нормального урла на хешбенг
-        if (no.page.urlPrepare(path) !== '/') {
-            loc.href = '/#!' + path;
-        }
-
+    if (historySupport) {
         window.addEventListener('popstate', function(e) {
             e.preventDefault();
             no.page.go();
         }, false);
     } else {
-
+        // старые браузеры редиректим с нормального урла на хешбенг
+        if (no.page.urlPrepare(path) !== '/') {
+            loc.href = '/#!' + path;
+        }
     }
 };
 
