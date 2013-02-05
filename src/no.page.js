@@ -4,14 +4,37 @@
  */
 no.page = {};
 
+no.page.init = function() {
+    var historySupport = !!window.history.pushState;
+    var loc = window.location;
+    var path = loc.pathname + loc.search;
+
+    if (!historySupport) {
+        // старые браузеры редиректим с нормального урла на хешбенг
+        if (no.page.urlPrepare(path) !== '/') {
+            loc.href = '/#!' + path;
+        }
+
+        window.addEventListener('popstate', function(e) {
+            e.preventDefault();
+            no.page.go();
+        }, false);
+    } else {
+
+    }
+};
+
+no.page.navigate = function(url) {
+    window.history.pushState(null, null, url);
+    return no.page.go(url);
+};
+
 /**
  * Осуществляем переход по ссылке.
  * @param {String} [url=location.pathname + location.search]
  * @return {no.Promise}
  */
 no.page.go = function(url) {
-    //TODO: return promise
-
     var loc = window.location;
 
     url = url || (loc.pathname + loc.search);
@@ -42,7 +65,7 @@ no.page.go = function(url) {
 };
 
 no.page.redirect = function(url) {
-    window.history.replaceState(null, 'mail', url);
+    window.history.replaceState(null, null, url);
     no.page.go(url);
 };
 

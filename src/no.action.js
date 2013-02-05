@@ -109,11 +109,9 @@ no.action.init = function() {
                     return true;
                 }
 
-                //TODO: HISTORY_API_SUPPORT: hash или не хеш
                 //могут быть ссылки <a href="#hash" target="_blank"/>
                 if (target.getAttribute('target') != '_blank') {
-                    window.history.pushState(null, 'mail', href);
-                    returnValue = no.page.go(href);
+                    returnValue = no.page.navigate(href);
                 }
             }
 

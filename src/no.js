@@ -157,10 +157,7 @@ no.init = function() {
 
     no.initMainView();
 
-    window.addEventListener('popstate', function(e) {
-        e.preventDefault();
-        no.page.go();
-    }, false);
+    no.page.init();
 };
 
 /**
