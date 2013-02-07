@@ -105,7 +105,7 @@ no.action.init = function() {
                 }
 
                 // если host ссылки не равен нашему хосту
-                if (target.host != window.location.host) {
+                if (target.hostname != window.location.hostname) {
                     return true;
                 }
 
