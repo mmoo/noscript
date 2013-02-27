@@ -111,7 +111,7 @@ no.action.init = function() {
 
                 //могут быть ссылки <a href="#hash" target="_blank"/>
                 if (target.getAttribute('target') != '_blank') {
-                    returnValue = no.page.navigate(href);
+                    returnValue = no.page.navigate(target.pathname + target.search);
                 }
             }
 
